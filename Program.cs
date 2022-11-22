@@ -1,35 +1,33 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System;
+using System.Collections.Generic;
 
 namespace CollectionDemo
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            GenericCollection<string> strColl = new GenericCollection<string>();
+            ICollection<Car> database = Database.CarTable;
 
-            strColl.Add("Samuel");
-            strColl.Add("Bola");
-            strColl.Add("Hulabaa");
-            strColl.Add("Learn");
-            strColl.Add("Olowo");
-            strColl.Add("Praise");
-            strColl.Add("Meana");
-            strColl.Add("Kive");
+            Car car1 = new Car { Id = "001" };
+            Car car2 = new Car { Id = "002" };
+            Car car3 = new Car { Id = "003" };
 
-            var val = strColl[1];
+            CarRepository carRepo = new CarRepository(database);
 
-            Console.WriteLine(val);
-            Console.WriteLine(strColl.NumberOfItems);
+            //adding with the use of a repository
+            //with abstraction
+            carRepo.Add(car1);
+            Console.WriteLine($"Current number of items in the CarTable = {database.Count}");
+            carRepo.Add(car2);
+            Console.WriteLine($"Current number of items in the CarTable = {database.Count}");
+            carRepo.Add(car3);
+            Console.WriteLine($"Current number of items in the CarTable = {database.Count}");
 
-            Console.WriteLine("--------------------------------------");
-            strColl.RemoveAt(1);
-            var val2 = strColl[1];
-
-            Console.WriteLine(val2);
-            Console.WriteLine(strColl.NumberOfItems);
+            carRepo.Delete("002");
+            Console.WriteLine($"Current number of items in the CarTable = {database.Count}");
         }
     }
 }

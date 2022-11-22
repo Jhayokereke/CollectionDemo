@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace CollectionDemo
 {
-    public class Generics
+    internal class AccountNumberGenerator
     {
-        public void Print<T>(T val)
-        {
-            Console.WriteLine(val);
-        }
     }
 }
